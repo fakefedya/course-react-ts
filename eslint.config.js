@@ -6,18 +6,29 @@ import tseslint from 'typescript-eslint'
 import { globalIgnores } from 'eslint/config'
 
 export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      js.configs.recommended,
-      tseslint.configs.recommended,
-      reactHooks.configs['recommended-latest'],
-      reactRefresh.configs.vite,
-    ],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-    },
-  },
+	globalIgnores(['dist']),
+	{
+		files: ['**/*.{ts,tsx}'],
+		extends: [
+			js.configs.recommended,
+			tseslint.configs.recommended,
+			reactHooks.configs['recommended-latest'],
+			reactRefresh.configs.vite,
+		],
+		languageOptions: {
+			ecmaVersion: 2020,
+			globals: globals.browser,
+		},
+		rules: {
+			'react-refresh/only-export-components': [
+				'warn',
+				{ allowConstantExport: true },
+			],
+			semi: ['error', 'always', { omitLastInOneLineBlock: false }],
+			'comma-dangle': ['error', 'never'],
+			quotes: ['error', 'single'],
+			'react/prop-types': [0],
+			indent: ['error', 'tab'],
+		},
+	},
 ])
