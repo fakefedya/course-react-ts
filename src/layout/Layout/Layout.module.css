@@ -1,0 +1,50 @@
+.layout {
+	min-height: 100vh;
+	display: flex;
+}
+
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 30px;
+	border-right: 1px solid var(--separator-color);
+}
+
+.menu {
+	display: flex;
+	flex-direction: column;
+	gap: 35px;
+}
+
+.link {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	text-decoration: none;
+	color: var(--text-color);
+}
+
+.user {
+	margin-bottom: 46px;
+}
+
+.name {
+	color: var(--text-color);
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+
+.email {
+	color: var(--text-secondary-color);
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
+.avatar {
+	filter: drop-shadow(0 8px 40px rgba(255, 197, 41, 0.25));
+}
