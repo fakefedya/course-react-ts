@@ -23,6 +23,15 @@
 	gap: 14px;
 	text-decoration: none;
 	color: var(--text-color);
+	transition: 0.3s colo ease-in-out;
+}
+
+.link:hover {
+	color: var(--text-color);
+}
+
+.active {
+	color: var(--text-color);
 }
 
 .user {
