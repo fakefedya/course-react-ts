@@ -57,3 +57,8 @@
 .avatar {
 	filter: drop-shadow(0 8px 40px rgba(255, 197, 41, 0.25));
 }
+
+.content {
+	width: 100%;
+	padding: 40px 60px;
+}
