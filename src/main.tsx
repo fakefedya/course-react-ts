@@ -28,8 +28,16 @@ const router = createBrowserRouter([
 					try {
 						const { data } = await axios.get(`${PREFIX}/products`)
 						return data
-					} catch (e) {
-						console.error(e)
+					} catch (error: unknown) {
+						if (axios.isAxiosError(error)) {
+							throw new Response(
+								error.response?.data?.message ?? error.message,
+								{
+									status: error.response?.status || 500,
+								}
+							)
+						}
+						throw new Response('Неизвестная ошибка', { status: 500 })
 					}
 				},
 				errorElement: <>Ошибка загрузки меню</>,
@@ -42,8 +50,20 @@ const router = createBrowserRouter([
 				path: '/product/:id',
 				element: <Product />,
 				loader: async ({ params }) => {
-					const { data } = await axios.get(`${PREFIX}/products/${params.id}`)
-					return data
+					try {
+						const { data } = await axios.get(`${PREFIX}/products/${params.id}`)
+						return data
+					} catch (error: unknown) {
+						if (axios.isAxiosError(error)) {
+							throw new Response(
+								error.response?.data?.message ?? error.message,
+								{
+									status: error.response?.status || 500,
+								}
+							)
+						}
+						throw new Response('Неизвестная ошибка', { status: 500 })
+					}
 				},
 				errorElement: <>Ошибка загрузки продукта</>,
 			},
