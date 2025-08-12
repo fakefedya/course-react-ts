@@ -8,6 +8,9 @@ import { Layout } from './layout/Layout/Layout.tsx'
 import { Product } from './pages/Product/Product.tsx'
 import axios from 'axios'
 import { PREFIX } from './helpers/API.ts'
+import { AuthLayout } from './layout/Auth/AuthLayout.tsx'
+import { Login } from './pages/Login/Login.tsx'
+import { Register } from './pages/Register/Register.tsx'
 
 const Menu = lazy(() => import('./pages/Menu/Menu')) // Добавили LAZY свойство для компонента Menu. Для больших компонент и тяжеловесных и верхне уровневых
 
@@ -66,6 +69,20 @@ const router = createBrowserRouter([
 					}
 				},
 				errorElement: <>Ошибка загрузки продукта</>,
+			},
+		],
+	},
+	{
+		path: '/auth',
+		element: <AuthLayout />,
+		children: [
+			{
+				path: 'login',
+				element: <Login />,
+			},
+			{
+				path: 'register',
+				element: <Register />,
 			},
 		],
 	},

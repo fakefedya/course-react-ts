@@ -7,4 +7,10 @@
 	border: 1px solid #eee;
 	box-shadow: 15px 20px 45px 0px rgba(233, 233, 233, 0.25);
 	padding: 20px;
+	transition: 0.2s outline ease-in-out;
+	outline: 1px transparent;
+}
+
+.input:focus {
+	outline: 1px solid #ffddd4;
 }
