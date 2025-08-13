@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from '../../components/Button/Button'
 import Heading from '../../components/Heading/Heading'
 import Input from '../../components/Input/Input'
@@ -6,6 +6,7 @@ import styles from './Login.module.css'
 import { useState, type FormEvent } from 'react'
 import axios, { AxiosError } from 'axios'
 import { PREFIX } from '../../helpers/API'
+import type { LoginResponse } from '../../interfaces/auth.interface'
 
 export type LoginForm = {
 	email: {
@@ -18,6 +19,7 @@ export type LoginForm = {
 
 export function Login() {
 	const [error, setError] = useState<string | null>()
+	const navigate = useNavigate()
 
 	const submit = async (e: FormEvent) => {
 		e.preventDefault()
@@ -25,15 +27,17 @@ export function Login() {
 		const target = e.target as typeof e.target & LoginForm
 		const { email, password } = target
 		await sendLogin(email.value, password.value)
+		navigate('/') // Для навигации (перенаправления) после успешной авторизации
 	}
 
 	const sendLogin = async (email: string, password: string) => {
 		try {
-			const { data } = await axios.post(`${PREFIX}/auth/login`, {
+			const { data } = await axios.post<LoginResponse>(`${PREFIX}/auth/login`, {
 				email,
 				password,
 			})
 			console.log(data)
+			localStorage.setItem('jwt', data.access_token)
 		} catch (error) {
 			if (error instanceof AxiosError) {
 				setError(error.response?.data.message)
