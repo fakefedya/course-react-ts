@@ -3,13 +3,20 @@ import styles from './Layout.module.css'
 import buttonStyles from '../../components/Button/Button.module.css'
 import Button from '../../components/Button/Button'
 import cn from 'classnames'
-import { useDispatch } from 'react-redux'
-import type { AppDispatch } from '../../store/store'
-import { userActions } from '../../store/user.slice'
+import { useDispatch, useSelector } from 'react-redux'
+import type { AppDispatch, RootState } from '../../store/store'
+import { getProfile, userActions } from '../../store/user.slice'
+import { useEffect } from 'react'
 
 export function Layout() {
 	const navigate = useNavigate()
 	const dispatch = useDispatch<AppDispatch>()
+	const profile = useSelector((s: RootState) => s.user.profile)
+
+	useEffect(() => {
+		dispatch(getProfile())
+	}, [dispatch])
+
 	const logout = () => {
 		dispatch(userActions.logout())
 		navigate('/auth/login')
@@ -24,8 +31,8 @@ export function Layout() {
 						src='/avatar.png'
 						alt='Аватар пользователя'
 					/>
-					<div className={styles['name']}>Антон Ларичев</div>
-					<div className={styles['email']}>alaricode@ya.ru</div>
+					<div className={styles['name']}>{profile?.name}</div>
+					<div className={styles['email']}>{profile?.email}</div>
 				</div>
 				<div className={styles['menu']}>
 					<NavLink // Более удобный способ навигации и подсветки активного класса
