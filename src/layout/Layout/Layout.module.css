@@ -66,3 +66,11 @@
 	flex-direction: column;
 	gap: 45px;
 }
+
+.cart-items-count {
+	font-size: 14px;
+	padding: 4px 10px;
+	color: var(--white-color);
+	background: var(--primary-color);
+	border-radius: 50%;
+}
