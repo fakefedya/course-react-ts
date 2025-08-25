@@ -34,9 +34,15 @@ const router = createBrowserRouter([
 						<Menu />
 					</Suspense>
 				),
-				loader: async () => {
+				loader: async ({ request }) => {
 					try {
-						const { data } = await axios.get(`${PREFIX}/products`)
+						const url = new URL(request.url) // Получаем URL с search params
+						const name = url.searchParams.get('name') || '' // Параметр name, если есть
+						const { data } = await axios.get(
+							`${PREFIX}/products${
+								name ? `?name=${encodeURIComponent(name)}` : ''
+							}`
+						)
 						return data
 					} catch (error: unknown) {
 						if (axios.isAxiosError(error)) {
