@@ -1,3 +1,4 @@
+import styles from './Cart.module.css'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../store/store'
 import Heading from '../../components/Heading/Heading'
@@ -27,14 +28,16 @@ export function Cart() {
 
 	return (
 		<>
-			<Heading>Корзина {items.length}</Heading>
-			{items.map((i) => {
-				const product = cardProducts?.find((p) => p.id === i.id)
-				if (!product) {
-					return
-				}
-				return <CartItem count={i.count} {...product} />
-			})}
+			<Heading>Корзина</Heading>
+			<div className={styles['cart-items-list']}>
+				{items.map((i) => {
+					const product = cardProducts?.find((p) => p.id === i.id)
+					if (!product) {
+						return
+					}
+					return <CartItem key={product.id} count={i.count} {...product} />
+				})}
+			</div>
 		</>
 	)
 }

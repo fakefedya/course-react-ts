@@ -1,0 +1,6 @@
+.cart-items-list {
+	max-width: 512px;
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+}

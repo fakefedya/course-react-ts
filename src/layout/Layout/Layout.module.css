@@ -68,9 +68,14 @@
 }
 
 .cart-items-count {
+	height: 24px;
+	width: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	font-size: 14px;
-	padding: 4px 10px;
 	color: var(--white-color);
 	background: var(--primary-color);
 	border-radius: 50%;
+	line-height: 0;
 }
